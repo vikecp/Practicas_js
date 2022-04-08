@@ -8,4 +8,3 @@ function palindromo(text){
         console.log("No es un palindromo!")
     }
 }
-palindromo("ana")

@@ -1,10 +1,11 @@
+/**Cuantas veces se repite una palabra en una frase */
 function search(frase, busqueda){
     let textoLimpio = frase.toLowerCase().replace(/[!¡.,-]/gi,''); // se crea un replace que crea un exp, regular por nada Dos comas.
 
     let res = 0;
     if(textoLimpio.includes(busqueda)){ //si hay coincidencia
         
-        let palabras = textoLimpio.split(" "); //split me lo lleva a un array y e cada espacio lo separa como un valor
+        let palabras = textoLimpio.split(" "); //split me lo lleva a un array y en cada espacio lo separa como un valor
         let mapa = { }
         for(let palabra of palabras){ //for of busca conseguir el valor de cada elemento del array mientras que for in muestran el indice y la propiedad
             if(mapa[palabra]){
@@ -23,4 +24,4 @@ function search(frase, busqueda){
     }
     return res;
 }
-search("La niña esta en , feliz! en su casa.  niña en GRANDE", "niña")
+search("La niña esta en , feliz! en su casa.  niña en GRANDE", "niña"); 

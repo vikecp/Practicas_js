@@ -5,7 +5,7 @@ function tablaMultiplicar(numero){
 
     for(let i = 1; i<=10; i++){
         let multiplicacion = (i*numero);
-        res += `${i} x ${numero} = ${multiplicacion}\n`;
+        res = res + `${i} x ${numero} = ${multiplicacion}\n`;
     }
     return res;
 }
