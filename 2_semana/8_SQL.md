@@ -35,3 +35,24 @@ WHERE code_fact = 1969;
 como sera implemtada nuestra data en el sistema
 
 
+# Tipos d edatos
+- Datos Numericos:
+    - Enteros
+    - Decimales
+    - Dinero
+    - Logico: 1 o 0
+    - flotantes
+
+- Fechas:
+diferentes precisiones
+- AAAA-MM-DD(3 bytes)
+
+- Cadenas de caracteres
+    - fijos: Char(n) ---> n bytes
+    - variables: varchar(n) ----> n+2 bytes maximo
+
+- Unicode
+    - nchar(n)
+    - nvarchar(n)
+
+
