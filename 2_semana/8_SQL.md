@@ -55,4 +55,9 @@ diferentes precisiones
     - nchar(n)
     - nvarchar(n)
 
+# Restricciones de dominio
+- para los tipos de datos
+- restricciones para el rango.
+- No anulacion
+- Unicidad
 
