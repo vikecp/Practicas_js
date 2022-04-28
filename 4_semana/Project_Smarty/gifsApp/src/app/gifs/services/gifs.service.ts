@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { SearchGifsResponse, Gif } from '../interface/gifs.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GifsService {
-  private apiKey: string = 'I3SogrtWfKZK2xQS2GDuKZSBPIrrN2kw'
+  private apiKey: string = 'I3SogrtWfKZK2xQS2GDuKZSBPIrrN2kw';
+  private servicioUrl: string = 'https://api.giphy.com/v1/gifs';
   private _historial: string[] = [];
 
-  //mostrar gifs
-  public resultados:any[] = []
+  //mostrar gifs y que se guarde en el localstorage
+  public resultados: Gif[] = []
 
   get historial(){
     return [...this._historial];
@@ -17,7 +19,9 @@ export class GifsService {
 
   //api
   constructor( private http: HttpClient){
-
+    //cargar del localstorage siempre se guarda para que si haces refreh siga aparenciendo
+    this._historial =  JSON.parse(localStorage.getItem('historial')!) || [];
+    this.resultados =  JSON.parse(localStorage.getItem('resultados')!) || [];
   }
 
   buscarGifs( query: string = ''){
@@ -30,12 +34,22 @@ export class GifsService {
     //limitar la cantidad de inserciones al historial
     //cortar el historial
     this._historial =  this._historial.splice(0,10);
-    }
 
-    this.http.get(`https://api.giphy.com/v1/gifs/search?api_key=I3SogrtWfKZK2xQS2GDuKZSBPIrrN2kw&q=${ query }&limit=10`) //mas funcionalidad con http que es igual a fetch
-    .subscribe((resp: any) =>{
-      console.log(resp);
+    //guardar en local storage, te crea un arreglo
+    localStorage.setItem('historial', JSON.stringify( this._historial));
+
+    }
+    //http params
+    const params = new HttpParams()
+          .set('api_key', this.apiKey)
+          .set('limit', '10')
+          .set('q', query);
+
+    this.http.get<SearchGifsResponse>(`${ this.servicioUrl }/search`, { params }) //mas funcionalidad con http que es igual a fetch
+    .subscribe((resp) =>{
       this.resultados = resp.data;
+      //grabar en el local storage
+      localStorage.setItem('resultados', JSON.stringify( this.resultados));
     })
     
 
