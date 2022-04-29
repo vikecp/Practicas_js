@@ -45,3 +45,9 @@
 
 # REactiveX con un modulo de node
 npm i --save rxjs
+
+# Para mandar a producion
+ng build --prod
+
+# crear servicios
+- ng g s gifs/services/gifs --spik-test
