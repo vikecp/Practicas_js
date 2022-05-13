@@ -12,8 +12,8 @@ inicio = f"""{app}
 Hola {nombre}, Soy Woopa!!! Y he pensado un número secreto
 entre el 1 al 100 y tienes 8 intentos para adivinar cual es!!! 
 ¿Te animas?
-el numero secreot es {num_secreto}
 """
+# el numero secreot es {num_secreto}
 print(inicio)
 numero_ingresar = int(input("Escribe el numero que crees que es el secreto: "))
 
