@@ -1,0 +1,74 @@
+# PASOS CREAR PROYECTO CON DJANGO
+1. Crear directorio para para guardar los proyectos para que cada uno tenga sus entornos
+- Mi directorio es Proyecto_Entorno
+
+1.1 Crear una carpeta para el proyecto en general:
+- se llama mi_web
+
+1.2 Ejecutar virtualenv web(nombre del entorno)
+- para crear el entorno virtual donde podras instalar todos los paquetes o librerias que necesites
+para ese proyecto en especifico
+
+- para activarlo: .\name_entorno\Scripts\activate
+- para desactivarlo: deactivate
+
+1.3 Instalar django con : pip install django
+- se intalará en el entorno virtual
+
+2. Crear una nueva carpeta en donde estara el codigo de la app
+- Primero ubicarte en mi_web
+- puedes crearla desde comandos: mkdir src
+- ahora tienes dos carpetas: src y web
+- web es la carpeta del entorno virtual
+
+3. Ubicarte en esa carpeta src y ejecutar
+- django-admin startproject proyecto
+- Creara la estructura para el proyecto con lo necesario, esto sirve para manipular principalmente la configuracion
+
+3.1 Para ver si funciona correr el servidor
+python manage.py runserver
+
+3.2 Si se desea hacer la migracion
+migrar archivos pendientes
+python manage.py migrate
+
+3.3 crear superusuario
+- python manage.py  createsuperuser
+
+4. Crear el codigo de la app en donde estan las vistas y models
+python manage.py startapp bases
+- base puede ser cualquier nombre
+
+5. Configurar las ULRs
+- Primero abrir settings en la carpeta Proyecto
+- Agregar en INSTALLED APPS 'bases.apps.BasesConfig', que es el nombre de la carperta bases el archivo apps y el nombre de esa
+clase.
+- BasesConfig es la clase del archivo apps.py de la carpeta base
+
+5.1 Crear en urls.py de la carpeta proyecto, el path de bases
+- primero importar path e include
+from django.urls import path, include
+- agregar este path para que tambien ejecute las urls que se encuentra en bases
+path('', include('bases.urls')),
+
+- Todo conectado
+
+6. Trabajar con bases para crear el modelo y una vista
+- Para conectar las views en urls de la carpeta bases:
+    - en urls importar el path
+    path('', views.lista_pendientes, name="pendintes")
+    - se llama del archivo views el nombre de la funcion que quieres
+
+- Crear el modelo en models.py este se crea con clases y atributos
+- Despues debes haacer una migracion para que se cree una nueva carpeta en bases llamada migrations:
+    - ejecutar python manage.py makemigrations
+        - Creara un archivo 0001_initial.py donde hizo la migracion del modelo
+        - Ejecutar python manage.py migrate
+
+    - En el admin.py  se llama al modelo para que pueda funcionar
+    from .models import Tarea
+    admin.site.register(Tarea)
+    - Tarea es el nombre dela clase en models en este caso a clase se le considera como si fuera una tabla, entonces
+    tarea es una Tabla del modelo.
+
+   - correr el servidor, y listo puedes crear tareas desde el la app web
